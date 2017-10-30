@@ -146,17 +146,10 @@ void BST<T>::insert(Node<T> *&node, const T &data)
 		Node<T> *newNode = new Node<T>(data);
 		node = newNode;
 	}
+	else if(data < node->mData)
+		insert(node->mLeft, data);
 	else
-	{
-		if(data < node->mData)
-		{
-			insert(node->mLeft, data);
-		}
-		else
-		{
-			insert(node->mRight, data);
-		}
-	}
+		insert(node->mRight, data);
 }
 
 
@@ -190,6 +183,7 @@ bool BST<T>::isExists(Node<T> *&node, const T &searchKey)
 template <class T>
 void BST<T>::makeDeletion(Node<T> *&node)
 {
+
 }
 
 
