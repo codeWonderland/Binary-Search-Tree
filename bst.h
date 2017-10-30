@@ -170,35 +170,32 @@ template <class T>
 bool BST<T>::isExists(T searchKey)
 {
 	Node<T> *tmp;
-	bool found = false;
-
 	tmp = mRootNode;
 
-	if (mRootNode->mData == searchKey)
-		return true;
-
-	while (!found)
+	while (true)
 	{
-		if (tmp->mData == searchKey)
-			found = true;
-
-		else if (tmp != NULL)
-		{
-			if (tmp->mData < searchKey)
-				tmp = tmp->mRight;
-
-			else
-				tmp = tmp->mLeft;
-		}
-		else
+		if (tmp == NULL)
 		{
 			delete tmp;
 			return false;
 		}
+		else if (tmp->mData == searchKey)
+		{
+			delete tmp;
+			return true;
+		}
+		else
+		{
+			if(searchKey < tmp->mData)
+			{
+				tmp = tmp->mLeft;
+			}
+			else
+			{
+				tmp = tmp->mRight;
+			}
+		}
 	}
-
-	delete tmp;
-	return found;
 }
 
 
