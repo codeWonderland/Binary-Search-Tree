@@ -4,17 +4,24 @@
 
 int main()
 {
-	BST<int> myTree;
+	BST<int> *myTree = new BST<int>();
 
-	myTree.insert(5);
-	myTree.insert(3);
-	myTree.insert(8);
-	myTree.insert(1);
-	myTree.insert(4);
+	myTree->insert(5);
+	myTree->insert(3);
+	myTree->insert(8);
+	myTree->insert(1);
+	myTree->insert(4);
 
-	std::cout << myTree.isExists(8) << std::endl;
-	std::cout << myTree.isExists(10) << std::endl;
-	std::cout << myTree.isEmpty() << std::endl;
+	std::cout << myTree->isExists(8) << std::endl;
+	std::cout << myTree->isExists(10) << std::endl;
+	std::cout << myTree->isEmpty() << std::endl;
 	
+	myTree->remove(3);
+
+	myTree->showInOrder();
+
+	delete myTree;
+
+	system("pause");
 	return 0;
 }

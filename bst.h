@@ -60,6 +60,7 @@ class BST
 		void displayPostOrder(Node<T> *node);
       	void displayTree(Node<T> *node, int tab);
 		void insert(Node<T> *&node, const T &data);
+		void insertTree(Node<T> *node);
 		bool isExists(Node<T> *&node, const T &searchKey);
 		void makeDeletion(Node<T> *&node);
 		void remove(Node<T> *&node, const T &searchKey);
@@ -106,24 +107,64 @@ BST<T>::~BST()
 template <class T>
 void BST<T>::destroySubtree(Node<T> *node)
 {
+	if (node != NULL)
+	{
+		if (node->mLeft != NULL)
+			destroySubtree(node->mLeft);
+
+		if (node->mRight != NULL)
+			destroySubtree(node->mRight);
+
+		delete node;
+	}
 }
 
 
 template <class T>
 void BST<T>::displayInOrder(Node<T> *node)
 {
+	if (node != NULL)
+	{
+		if (node->mLeft != NULL)
+			displayInOrder(node->mLeft);
+
+		std::cout << node->mData;
+
+		if (node->mRight != NULL)
+			displayInOrder(node->mRight);
+	}
 }
 
 
 template <class T>
 void BST<T>::displayPreOrder(Node<T> *node)
 {
+	if (node != NULL)
+	{
+		std::cout << node->mData;
+
+		if (node->mLeft != NULL)
+			displayPreOrder(node->mLeft);
+
+		if (node->mRight != NULL)
+			displayPreOrder(node->mRight);
+	}
 }
 
 
 template <class T>
 void BST<T>::displayPostOrder(Node<T> *node)
 {
+	if (node != NULL)
+	{
+		if (node->mLeft != NULL)
+			displayPostOrder(node->mLeft);
+
+		if (node->mRight != NULL)
+			displayPostOrder(node->mRight);
+
+		std::cout << node->mData;
+	}
 }
 
 
@@ -183,9 +224,37 @@ bool BST<T>::isExists(Node<T> *&node, const T &searchKey)
 template <class T>
 void BST<T>::makeDeletion(Node<T> *&node)
 {
+	Node<T> *insertNodes, *tmpTree = node;
 
+	//We may need to change this to node->mRight = node->mRight;
+	node = node->mRight;
+
+	tmpTree->mRight = NULL;
+
+	insertNodes = tmpTree->mLeft;
+	tmpTree->mLeft = NULL;
+
+	delete tmpTree;
+
+	insertTree(insertNodes);
 }
 
+template <class T>
+void BST<T>::insertTree(Node<T> *node)
+{
+	if (node != NULL) 
+	{
+		if (node->mLeft != NULL)
+			insertTree(node->mLeft);
+		
+		insert(node->mData);
+	
+		if (node->mRight != NULL)
+			insertTree(node->mRight);
+
+		delete node;
+	}
+}
 
 template <class T>
 void BST<T>::remove(Node<T> *&node, const T &searchKey)
@@ -216,13 +285,15 @@ template <class T>
 void BST<T>::showInOrder()
 {
 	displayInOrder(mRootNode);
+	std::cout << std::endl;
 }
 
 
 template <class T>
 void BST<T>::showPreOrder()
 {
-	displayPreOrder(mRootNode); 
+	displayPreOrder(mRootNode);
+	std::cout << std::endl;
 }
 
 
@@ -230,6 +301,7 @@ template <class T>
 void BST<T>::showPostOrder()
 {
 	displayPostOrder(mRootNode);
+	std::cout << std::endl;
 }
 
 
