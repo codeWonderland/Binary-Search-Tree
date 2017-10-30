@@ -184,9 +184,11 @@ void BST<T>::insert(Node<T> *&node, const T &data)
 {
 	if (node == NULL)
 	{
-		Node<T> *newNode = new Node<T>(data);
-		node = newNode;
+		node = new Node<T>(data);
+		return;
 	}
+	else if (node->mData == data)
+		return;
 	else if(data < node->mData)
 		insert(node->mLeft, data);
 	else
