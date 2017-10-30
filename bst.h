@@ -60,6 +60,7 @@ class BST
 		void displayPostOrder(Node<T> *node);
       	void displayTree(Node<T> *node, int tab);
 		void insert(Node<T> *&node, const T &data);
+		bool isExists(Node<T> *&node, const T &searchKey);
 		void makeDeletion(Node<T> *&node);
 		void remove(Node<T> *&node, const T &searchKey);
 
@@ -169,33 +170,20 @@ bool BST<T>::isEmpty()
 template <class T>
 bool BST<T>::isExists(T searchKey)
 {
-	Node<T> *tmp;
-	tmp = mRootNode;
+	return isExists(mRootNode, searchKey);
+}
 
-	while (true)
-	{
-		if (tmp == NULL)
-		{
-			delete tmp;
-			return false;
-		}
-		else if (tmp->mData == searchKey)
-		{
-			delete tmp;
-			return true;
-		}
-		else
-		{
-			if(searchKey < tmp->mData)
-			{
-				tmp = tmp->mLeft;
-			}
-			else
-			{
-				tmp = tmp->mRight;
-			}
-		}
-	}
+template <class T>
+bool BST<T>::isExists(Node<T> *&node, const T &searchKey)
+{
+	if (node == NULL)
+		return false;
+	else if (node->mData > searchKey)
+		isExists(node->mLeft, searchKey);
+	else if (node->mData < searchKey)
+		isExists(node->mRight, searchKey);
+	else
+		return true;
 }
 
 
@@ -226,7 +214,7 @@ void BST<T>::remove(T searchKey)
 	// we will call the following function if we are
 	// using recursive method, otherwise all functionality
 	// should be self sustain here
-	//remove(mRootNode, searchKey);
+	remove(mRootNode, searchKey);
 }
 
 
