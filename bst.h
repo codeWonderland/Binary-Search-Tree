@@ -76,6 +76,7 @@ class BST
 		void showInOrder();
 		void showPreOrder();
 		void showPostOrder();
+		void showTree();
 };
 
 
@@ -165,6 +166,32 @@ void BST<T>::displayPostOrder(Node<T> *node)
 
 		std::cout << node->mData;
 	}
+}
+
+template <class T>
+void BST<T>::displayTree(Node<T> *node, int tab)
+{
+	if (node != NULL)
+	{
+		tab++;
+		int i;
+		for (i = 0; i < tab; i++)
+			std::cout << "\t";
+
+		std::cout << node->mData << std::endl;
+
+		if (node->mLeft != NULL)
+			displayTree(node->mLeft, tab);
+
+		if (node->mRight != NULL)
+			displayTree(node->mRight, tab);
+	}
+}
+
+template <class T>
+void BST<T>::showTree()
+{
+	displayTree(mRootNode, 0);
 }
 
 
