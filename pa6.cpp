@@ -1,3 +1,15 @@
+/* ***       Author:  Alice Easter
+     *  Last Update:  November 2, 2017
+     *        Class:  CSI-281
+     *     Filename:  pa6.cpp
+     *
+     *  Description:
+     *      Stub driver for testing
+     *
+     *  Certification of Authenticity:
+     *     I certify that this assignment is entirely my own work.
+     ********************************************************************/
+
 #include <iostream>
 #include <iomanip>
 #include "bst.h"
