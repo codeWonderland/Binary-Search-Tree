@@ -31,6 +31,12 @@ int main()
 	myTree->remove(3);
 
 	myTree->showInOrder();
+	
+	myTree->showPreOrder();
+	
+	myTree->showPostOrder();
+	
+	myTree->showTree();
 
 	delete myTree;
 
